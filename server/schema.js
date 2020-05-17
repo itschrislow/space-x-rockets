@@ -57,26 +57,37 @@ const RootQuery = new GraphQLObjectType({
   fields: {
     rockets: {
       type: new GraphQLList(RocketType),
-      resolve: async (parent, args) => {
-        const response = await axios.get(
-          'https://api.spacexdata.com/v3/rockets'
-        );
-        return response.data;
+      resolve(parent, args) {
+          return axios
+            .get('https://api.spacexdata.com/v3/rockets')
+            .then(res => res.data)
       }
+    //   resolve: async (parent, args) => {
+    //     const response = await axios.get(
+    //       'https://api.spacexdata.com/v3/rockets'
+    //     );
+    //     return response.data;
+    //   }
     },
     rocket: {
-      type: RocketType,
-      args: {
-        rocket_id: { type: GraphQLString }
-      },
-      resolve: async (parent, args) => {
-        const response = await axios.get(
-          `https://api.spacexdata.com/v3/rockets/${args.rocket_id}`
-        );
-        return response.data;
-      }
+        type: RocketType,
+        args: {
+            rocket_id: { type: GraphQLString }
+        },
+        resolve(parent, args) {
+            return axios.get(`https://api.spacexdata.com/v3/rockets/${args.rocket_id}`)
+                .then(res => res.data)
+        }
+    //   resolve: async (parent, args) => {
+    //     const response = await axios.get(
+    //       `https://api.spacexdata.com/v3/rockets/${args.rocket_id}`
+    //     );
+    //     return response.data;
+    //   }
     }
   }
 });
 
-module.exports = new GraphQLSchema({ query: RootQuery });
+module.exports = new GraphQLSchema({
+    query: RootQuery
+});
