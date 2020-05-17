@@ -1,14 +1,35 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import { gql } from 'apollo-boost'
-import ApolloClient from 'apollo-boost'
+
+import { gql, ApolloClient, InMemoryCache, NormalizedCacheObject, HttpLink } from 'apollo-boost'
 import { ApolloProvider, useQuery } from '@apollo/react-hooks'
 
 import Layout from '../components/layout'
 
+const cache = new InMemoryCache();
+const link = new HttpLink({
+    uri: 'http://localhost:3000/'
+});
+
 const client = new ApolloClient({
-    uri: 'https://api.spacexdata.com/v3/rockets'
-})
+    cache,
+    link
+});
+
+client
+    .query({
+        query: gql`
+        query GetLaunch {
+            launch(id: 56) {
+            id
+            mission {
+                name
+            }
+            }
+        }
+        `
+    })
+    .then(result => console.log(result));
 
 const ROCKETS = gql`
     {
