@@ -16,13 +16,12 @@ export default function Rockets() {
     const { loading, error, data } = useQuery(ROCKETS);
 
     if (loading) {
-        console.log('loading')
-        return <h3>Loading...</h3>
+        return <p className="is-size-1 has-text-centered">Loading...</p>
     }
     
     if (error) {
         console.log(error)
-        return <h1>Error</h1>
+        return <p className="is-size-1 has-text-centered">Error</p>
     }
 
     return(

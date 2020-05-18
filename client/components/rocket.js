@@ -7,18 +7,18 @@ export default function Rocket({ rocket }) {
         country
     } = rocket;
 
+    const rocket_image = `images/cards/${rocket_name}.png`
+
     return(
-        <div className="column is-one-quarter">
-                <div className="card">
-                <div className="card-image">
-                    {/* <figure class="image is-4by3"> */}
-                    <img src="images/example_card_img.jpg" />
-                    {/* </figure> */}
+        <div className="column is-one-third">
+            <div className="card">
+                <div className="card-image has-text-centered">
+                    <img src={rocket_image} />
                 </div>
                 <div className="card-content">
                     <div className="media">
-                        <div className="media-content">
-                            <p className="title is-4">{rocket_name}</p>
+                        <div className="media-content has-text-centered">
+                            <p className="title is-3">{rocket_name}</p>
                             <p className="subtitle is-6">{country}</p>
                             <Link href={{ pathname: '/details', query: { rocket_id } }}>
                                 <a><button className="button">Details</button></a>

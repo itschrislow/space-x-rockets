@@ -6,7 +6,6 @@ const schema = require('./schema');
 
 const app = express();
 
-// Allow origin
 app.use(cors());
 
 app.use(
