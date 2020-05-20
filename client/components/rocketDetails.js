@@ -2,6 +2,7 @@ import { gql } from 'apollo-boost'
 import { useQuery } from '@apollo/react-hooks'
 
 import Date from '../components/date'
+import Loader from './loader';
 
 const ROCKET_DETAILS = gql`
     query ROCKET_DETAILS($rocket_id: String!) {
@@ -34,7 +35,7 @@ export default function RocketDetails({ rocket_id }) {
     })
 
     if (loading) {
-        return <p className="is-size-1 has-text-centered">Loading...</p>
+        return <Loader />
     }
     
     if (error) {
